@@ -32,11 +32,20 @@ export const validatePhone = (phone) => {
   return null;
 };
 
-// Strict Student ID Validation (e.g. IT21000004 or ADIT20202022)
+// Strict Student ID Validation (e.g. IT21000004)
 export const validateStudentId = (id) => {
-  if (!id || id.trim() === '') return 'Campus ID is required';
-  if (!/^[A-Za-z]{2,4}\d{8}$/.test(id.trim())) {
-    return 'Must be 2-4 letters followed by 8 digits (e.g. IT21000004 or ADIT20202022)';
+  if (!id || id.trim() === '') return 'Student ID is required';
+  if (!/^[A-Za-z]{2}\d{8}$/.test(id.trim())) {
+    return 'Must be 2 letters followed by 8 digits (e.g. IT21000004)';
+  }
+  return null;
+};
+
+// Strict Admin ID Validation (e.g. AD12345678)
+export const validateAdminId = (id) => {
+  if (!id || id.trim() === '') return 'Admin ID is required';
+  if (!/^AD\d{8}$/i.test(id.trim())) {
+    return 'Must be AD followed by exactly 8 digits (e.g. AD12345678)';
   }
   return null;
 };

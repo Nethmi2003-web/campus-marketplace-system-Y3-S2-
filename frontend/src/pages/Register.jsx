@@ -6,7 +6,7 @@ import Button from '../components/ui/Button';
 import { User, Mail, Lock, CreditCard } from 'lucide-react';
 import styles from '../styles/Form.module.css';
 import { registerUser } from '../services/authService';
-import { validateUniversityEmail, validatePasswordStrength, validateRequired, validatePhone, validateStudentId } from '../utils/validators';
+import { validateUniversityEmail, validatePasswordStrength, validateRequired, validatePhone, validateStudentId, validateAdminId } from '../utils/validators';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -56,16 +56,16 @@ const Register = () => {
   const validate = () => {
     const newErrors = {};
     newErrors.fullName = validateRequired(formData.fullName, 'Full Name');
-    
-    newErrors.studentId = validateStudentId(formData.studentId);
-    if (!newErrors.studentId && regType === 'Admin' && !formData.studentId.toUpperCase().startsWith('AD')) {
-      newErrors.studentId = 'Admin ID must start with "AD" (e.g. ADIT20202022)';
+    if (regType === 'Admin') {
+      newErrors.studentId = validateAdminId(formData.studentId);
+    } else {
+      newErrors.studentId = validateStudentId(formData.studentId);
     }
+    
     newErrors.faculty = validateRequired(formData.faculty, 'Faculty');
     newErrors.phoneNo = validatePhone(formData.phoneNo);
-    
-    if (regType === 'Student' && !idPhoto) {
-      newErrors.idPhoto = 'Student ID Photo is required';
+    if (!idPhoto) {
+      newErrors.idPhoto = regType === 'Admin' ? 'Admin ID Image is required' : 'Student ID Photo is required';
     }
 
     newErrors.email = validateUniversityEmail(formData.email);
@@ -127,7 +127,7 @@ const Register = () => {
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', justifyContent: 'center' }}>
            <button
              type="button"
-             onClick={() => { setRegType('Student'); setErrors(prev => ({...prev, studentId: null})); }}
+             onClick={() => { setRegType('Student'); setErrors(prev => ({...prev, studentId: null, idPhoto: null})); }}
              style={{
                flex: 1, padding: '10px', borderRadius: '8px', 
                border: '1px solid #cbd5e1', cursor: 'pointer', fontWeight: 'bold',
@@ -140,7 +140,7 @@ const Register = () => {
            </button>
            <button
              type="button"
-             onClick={() => { setRegType('Admin'); setErrors(prev => ({...prev, studentId: null})); }}
+             onClick={() => { setRegType('Admin'); setErrors(prev => ({...prev, studentId: null, idPhoto: null})); }}
              style={{
                flex: 1, padding: '10px', borderRadius: '8px', 
                border: '1px solid #cbd5e1', cursor: 'pointer', fontWeight: 'bold',
@@ -169,7 +169,7 @@ const Register = () => {
             <Input
               label={regType === 'Admin' ? "Admin ID" : "Student ID"}
               name="studentId"
-              placeholder={regType === 'Admin' ? "ADIT20202022" : "IT21000000"}
+              placeholder={regType === 'Admin' ? "AD12345678" : "IT21000000"}
               value={formData.studentId}
               onChange={handleChange}
               error={errors.studentId}
@@ -198,16 +198,14 @@ const Register = () => {
             />
           </div>
 
-          {regType === 'Student' && (
-            <Input
-              label="Student ID Photo"
-              name="idPhoto"
-              type="file"
-              accept="image/*"
-              onChange={handleChange}
-              error={errors.idPhoto}
-            />
-          )}
+          <Input
+            label={regType === 'Admin' ? "Admin ID Image" : "Student ID Photo"}
+            name="idPhoto"
+            type="file"
+            accept="image/*"
+            onChange={handleChange}
+            error={errors.idPhoto}
+          />
 
           <Input
             label="University Email"
