@@ -72,13 +72,9 @@ const Login = () => {
     try {
       const result = await loginUser(formData.email, formData.password);
       
-      // Check user role and navigate accordingly
-      if (result.user && result.user.role === 'Admin') {
-        navigate('/admin');
-      } else {
-        // Normal users go to the marketplace Home Page
-        navigate('/');
-      }
+      // Normal users and admins both go to the main application for now
+      // (Admin dashboard will be handled by Person B/C)
+      navigate('/');
     } catch (err) {
       setServerError(err.message || 'Login failed');
       // Show error SVG on server failure too
