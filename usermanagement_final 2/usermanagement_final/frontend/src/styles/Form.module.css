@@ -1,0 +1,231 @@
+/* ═══════════════════════════════════════════════════════════════
+   Form Module — Redesigned to match SLIIT Marketplace Home Page
+   ═══════════════════════════════════════════════════════════════ */
+
+.formWrapper {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 1.75rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  color: #0b1e4a;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.subtitle a,
+.link {
+  color: #e8651a;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subtitle a:hover,
+.link:hover {
+  color: #cf5510;
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  gap: 0.875rem;
+}
+
+.row > div {
+  flex: 1;
+}
+
+/* Forgot password link */
+.forgotPassword {
+  align-self: flex-end;
+  font-size: 0.825rem;
+  color: #e8651a;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  margin-top: -0.35rem;
+  transition: color 0.2s ease;
+}
+
+.forgotPassword:hover {
+  color: #cf5510;
+}
+
+/* Checkbox */
+.checkboxGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: #e8651a;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkboxText {
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Error / Success Banners */
+.errorBanner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.04) 100%);
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.successBanner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  color: #059669;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+/* ─── Modal / Security Overlay ─── */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(11, 30, 74, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow:
+    0 25px 60px -8px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(11, 30, 74, 0.05);
+  animation: modalPopup 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPopup {
+  0% {
+    transform: scale(0.85) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalIcon {
+  margin: 0 auto 1.5rem;
+  color: #ef4444;
+  background: #fef2f2;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 3px solid #fecaca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0b1e4a;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.modalText {
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
+}
+
+.modalBtn {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: white;
+  border: none;
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.modalBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -3px rgba(239, 68, 68, 0.35);
+}
+
+/* Blocked state */
+.blockedContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  text-align: center;
+  background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+  border: 2px dashed #fca5a5;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+/* Error message inline */
+.errorMessage {
+  display: block;
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}

@@ -1,0 +1,85 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Red pulsing glow behind */
+.errorGlow {
+  animation: errorPulse 2s infinite ease-in-out;
+}
+
+@keyframes errorPulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.15); }
+}
+
+/* Shield shake */
+.shieldShake {
+  transform-origin: center;
+  animation: shake 0.8s infinite ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-6deg); }
+  30% { transform: rotate(6deg); }
+  45% { transform: rotate(-4deg); }
+  60% { transform: rotate(4deg); }
+  75% { transform: rotate(-2deg); }
+  90% { transform: rotate(2deg); }
+}
+
+/* Exclamation bounce */
+.exclamationBounce {
+  transform-origin: center bottom;
+  animation: excBounce 1s infinite ease-in-out;
+}
+
+@keyframes excBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.1); }
+}
+
+/* Floating broken pieces */
+.floatPiece {
+  animation: floatAway 3s infinite ease-out;
+  opacity: 0;
+}
+
+.piece1 { animation-delay: 0s; }
+.piece2 { animation-delay: 0.6s; }
+.piece3 { animation-delay: 1.2s; }
+.piece4 { animation-delay: 1.8s; }
+
+@keyframes floatAway {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translate(var(--float-x, 30px), var(--float-y, -80px)) rotate(var(--float-r, 45deg)) scale(0.3); opacity: 0; }
+}
+
+/* Red line scan across broken form */
+.scanLine {
+  animation: scan 2.5s infinite ease-in-out;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-30px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(100px); opacity: 0; }
+}
+
+/* Crossed out text wiggle */
+.wiggle {
+  animation: wiggling 1.2s infinite ease-in-out;
+}
+
+@keyframes wiggling {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
